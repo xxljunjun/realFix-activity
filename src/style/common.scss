@@ -1,0 +1,30 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+html,body{
+    font-size: 16px;
+    height: 100%;
+}
+html,body,img,input,ul,ol,dl,dt,dd,em,i,strong,h1,h2,h3,h4,h5,h6,div,span,
+p,table,li,tr,td,th{
+	padding: 0;margin: 0;
+}
+ul li,ol li{
+	list-style: none;
+}
+a{
+	text-decoration: none;
+}
+input{
+	outline: none;
+	border: 0;
+}
+img{
+	vertical-align:top;
+}
+.flex{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
