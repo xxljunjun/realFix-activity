@@ -23,5 +23,5 @@ npm run lint
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
-# 20210213新项目
-webApp商城类
+# realFix活动
+初始化web端项目
