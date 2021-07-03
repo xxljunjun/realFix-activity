@@ -1,3 +1,5 @@
+# 此分支可用作H5页面的开发，以及手机端h5页面适配开发
+
 # 一、创建项目
 * npm install @vue/cli -g
 * vue create webtemplate
