@@ -1,8 +1,7 @@
 
 
 //路由懒加载
-const Home = () => import('./home/Home.vue')
-const padHome = () => import('./padHome/index.vue')
+const home = () => import('@/pages/home/index.vue')
 
 /* 1.export与export default均可用于导出常量、函数、文件、模块等
 
@@ -18,7 +17,7 @@ const padHome = () => import('./padHome/index.vue')
 //router:路由
 //routes:录像
 const routes = [
-    { path: '/', component: Home },
-    { path: '/padHome', component: padHome },
+    { path: '/', component: home },
+    { path: '/home', component: home },
 ]
 export default routes

@@ -1,23 +1,19 @@
 <template>
-  <div class="qf-tao">
+  <div class="xxl">
     <router-view></router-view>
   </div>
 </template>
 <script>
 export default {
   name: 'App',
-  data(){
-    return{
-      
-    }
+  data() {
+    return {}
   },
-  components: {
-    
-  }
+  components: {},
 }
 </script>
 <style lang='scss'>
-.qf-tao{
+.xxl {
   height: 100%;
 }
 </style>
