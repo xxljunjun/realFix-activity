@@ -3,8 +3,10 @@
     <div>{{ $t('greeting') }}</div>
     <button @click="changeLanguage">点我改变语言</button>
     <hr />
-    <div></div>
-    <button @click="getWheather">点我改变语言</button>
+    <button @click="getWheather">发送ajax请求</button>
+    <hr />
+    <button @click="getToPop">弹窗</button>
+    <WinnerPopup :isShowPop.sync="isShow" />
     <ButtomBar />
   </div>
 </template>
@@ -12,9 +14,12 @@
 <script>
 import { getWeather } from '@/server/api/api.js'
 import ButtomBar from '@/components/bottom-bar'
+import WinnerPopup from '@/components/popup'
 export default {
   data() {
-    return {}
+    return {
+      isShow: false,
+    }
   },
   mounted() {
     console.log('323', this.$i18nMsg)
@@ -33,9 +38,14 @@ export default {
         console.log('获取天气', res)
       })
     },
+    getToPop() {
+      console.log('0000000')
+      this.isShow = true
+    },
   },
   components: {
     ButtomBar,
+    WinnerPopup,
   },
 }
 </script>
