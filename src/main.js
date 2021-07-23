@@ -7,7 +7,7 @@ import i18n from '@/utils/i18n';
 import "@/style/common.scss"//引入全局样式
 import "@/style/vant.scss"
 Vue.prototype.$i18nMsg = i18n.messages[i18n.locale] //挂载上去this.$i18nMsg.xxx去访问
-
+console.log("当前的环境是",process.env)
 Vue.use(Lazyload);
 
 Vue.config.productionTip = false

@@ -3,8 +3,17 @@ const path = require('path')
 function resolve(dir) {
 	return path.join(__dirname, dir)
 }
+const Version = new Date().getTime()
+let publicPath = './'
+switch (process.env.NODE_ENV) {
+  case 'dev':
+    publicPath = './'
+    break
+  case 'testus':
+    publicPath = 'https://db3imdgpgx2uh.cloudfront.net'
+}
 module.exports = {
-	publicPath: './',
+	publicPath: publicPath,
 	// 将构建好的文件输出到哪里
 	outputDir: 'dist/static',
 
@@ -32,6 +41,14 @@ module.exports = {
 		sourceMap: true,
 	},
 	chainWebpack: config => {
+		//cdn中js加时间戳
+		config.output.filename('js/[name].[hash].' + Version + '.js').end()
+		config.output.chunkFilename('js/[name].[hash].' + Version + '.js').end()
+		//配置标题
+		config.plugin('html').tap((args) => {
+		args[0].title = 'H5模板'
+		return args
+		})
 		// 配置别名
 		config.resolve.alias
 			.set('@', resolve('src'))
