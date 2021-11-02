@@ -29,7 +29,9 @@ export default {
     console.log("国际化", this.$i18n);
   },
   methods: {
-    comfireTime() {},
+    comfireTime(val) {
+      console.log("需要展示的数据", val);
+    },
     goToChooseTime() {
       this.$refs.chooseTime.showDialog();
     },

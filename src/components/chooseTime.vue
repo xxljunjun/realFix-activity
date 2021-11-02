@@ -9,22 +9,24 @@
     @click-close-icon="clickicon"
   >
     <div class="title">请选择面试时间</div>
+    <!--年-->
     <div class="tab">
       <div
         class="firstYear"
         :class="{ selectyear: leftyear }"
-        @click="chooseYear(0)"
+        @click="chooseYear(year)"
       >
         {{ year + "年" }}
       </div>
       <div
         class="secondYear"
         :class="{ selectyear: !leftyear }"
-        @click="chooseYear(1)"
+        @click="chooseYear(year + 1)"
       >
         {{ year + 1 + "年" }}
       </div>
     </div>
+    <!--步骤-->
     <div class="process">
       <div class="month step_1" v-if="active == 1">请选择月份</div>
       <div class="step step_2" v-if="active >= 2">
@@ -55,7 +57,8 @@
         </div>
       </div>
     </div>
-    <div v-if="mounthStatus">
+    <!--月，日，时间-->
+    <div v-if="active == 1">
       <div
         class="times"
         v-for="(item, index) in mounthList"
@@ -65,7 +68,7 @@
         {{ item + "月" }}
       </div>
     </div>
-    <div v-if="dayStatus">
+    <div v-if="active == 2">
       <div
         class="times"
         v-for="(item, index) in DayList"
@@ -75,7 +78,7 @@
         {{ item + "日" }}
       </div>
     </div>
-    <div v-if="timeStatus">
+    <div v-if="active == 3">
       <div
         class="times"
         v-for="(item, index) in timeList"
@@ -85,7 +88,7 @@
         {{ item }}
       </div>
     </div>
-    <div v-if="timeStatus_end">
+    <div v-if="active == 4">
       <div
         class="times"
         v-for="(item, index) in timeList"
@@ -112,10 +115,6 @@ export default {
       active: 1, //步骤
       show: false, //弹窗开关
       leftyear: true,
-      mounthStatus: true,
-      dayStatus: false,
-      timeStatus: false,
-      timeStatus_end: false,
       mounthList: 12,
       DayList: 31,
       timeList: [
@@ -152,12 +151,14 @@ export default {
      */
     clickoverlay() {
       this.show = false;
+      this.$emit("close");
     },
     /**
      * @function:关闭弹窗
      */
     clickicon() {
       this.show = false;
+      this.$emit("close");
     },
     /**
      * @function:选择时间的弹窗显示
@@ -169,18 +170,14 @@ export default {
      * @function:重置时间选择器
      */
     reset() {
-      this.mounthStatus = true;
-      this.dayStatus = false;
-      this.timeStatus = false;
-      this.timeStatus_end = false;
       this.leftyear = true;
       this.Operation_txt = "请选择日期";
       this.active = 1;
     },
     chooseYear(val) {
+      console.log(val);
       this.reset();
-      this.mounthList = 12;
-      if (val) {
+      if (val !== this.year) {
         this.leftyear = false;
         this.selectTime.year = this.year + 1;
       } else {
@@ -193,32 +190,41 @@ export default {
       this.selectTime.endtime = "";
     },
     chooseMounth(item) {
+      //一个月的天数默认是31的，判断年份this.selectTime.year4,6,9,11
+      if (item == 4 || item == 6 || item == 9 || item == 11) {
+        this.DayList = 30;
+      } else if (item == 2) {
+        let year = this.selectTime.year;
+        if ((year % 4 == 0 && year % 100 !== 0) || year % 400 == 0) {
+          // console.log("今年是闰年！");
+          this.DayList = 29;
+        } else {
+          // console.log("今年是平年！");
+          this.DayList = 28;
+        }
+      } else {
+        this.DayList = 31;
+      }
+
       this.active = 2;
       console.log(item);
       this.selectTime.mounth = item;
-      this.mounthStatus = false;
       this.dayStatus = true;
     },
     chooseDay(item) {
       this.active = 3;
       console.log(item);
       this.selectTime.day = item;
-      this.dayStatus = false;
-      this.timeStatus = true;
       this.Operation_txt = "请选择开始时间";
     },
     chooseTime(item) {
       this.active = 4;
       this.selectTime.time = item;
-      this.dayStatus = false;
-      this.timeStatus = false;
-      this.mounthStatus = false;
-      this.timeStatus_end = true;
       this.Operation_txt = "请选择结束时间";
     },
     chooseTime_end(item) {
       this.selectTime.endtime = item;
-      console.log("需要展示的数据", this.selectTime);
+      // console.log("需要展示的数据", this.selectTime);
       this.$emit("comfire", this.selectTime);
       this.show = false;
       this.reset();
