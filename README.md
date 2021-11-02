@@ -1,10 +1,10 @@
-# 此分支可用作H5页面的开发，以及手机端h5页面适配开发
+### 此分支可用作H5页面的开发，以及手机端h5页面适配开发
 
-# 一、创建项目
+#### 一、创建项目
 * npm install @vue/cli -g
 * vue create webtemplate
 
-# 二、安装vant-UI组件库
+#### 二、安装vant-UI组件库
 * npm install vant -S  
 * npm i babel-plugin-import -D  //按需引入
 * 在.babelrc 中添加配置
@@ -26,7 +26,7 @@ components: {
 },
 ```
 
-# 三、移动端适配方案（兼容eant-UI）
+#### 三、移动端适配方案（兼容vant-UI）
 * npm i postcss-px-to-viewport -D
 * 在.postcssrc.js文件中
 ```
@@ -56,20 +56,20 @@ module.exports = ({ file }) => {
 
 }
 ```
-# 四、配置路由
+#### 四、配置路由
 * npm install vue-router -S  
 
-# 五、配置状态管理
+#### 五、配置状态管理
 * npm install vuex -S  
 
-# 六、配置sass
+#### 六、配置sass
 * npm install sass-loader -D    
 * npm install node-sass -D
 
-# 七、配置axios
+#### 七、配置axios
 * npm install axios -S
 
-# 八、安装i18n国际化
+#### 八、安装i18n国际化
 + npm install vue-i18n --save
 + //在i18n.js中
 import Vue from 'vue';
@@ -95,3 +95,8 @@ Vue.prototype.$i18nMsg = i18n.messages[i18n.locale] //挂载上去this.$i18nMsg.
 zh.js
 en.js
 //this.$i18n.locale = this.$i18n.locale === 'zh' ? 'en' : 'zh'
+
+#### 九、配置vue.confige
+* 配置别名
+* 跨域请求代理
+* 请求添加时间戳和cdn前缀
